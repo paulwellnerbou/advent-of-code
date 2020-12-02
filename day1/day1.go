@@ -3,7 +3,7 @@ package day1
 import "../common"
 
 func day1main() {
-	inputs := common.ReadInput()
+	inputs := common.ToInts(common.ReadInput("input"))
 	println(SearchSumAndMultiply2(inputs, 2020))
 	println(SearchSumAndMultiply3(inputs, 2020))
 }
