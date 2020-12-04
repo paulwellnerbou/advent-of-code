@@ -27,10 +27,10 @@ func ReadInput(inputFile string) []string {
 }
 
 func ToInts(input []string) []int {
-	var numbers []int // empty numbers
+	var numbers []int
 	for _, digit := range input {
 		n, _ := strconv.Atoi(digit)
-		numbers = append(numbers, n) // build up numbers
+		numbers = append(numbers, n)
 	}
 	return numbers
 }
