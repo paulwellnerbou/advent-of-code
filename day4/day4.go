@@ -6,17 +6,20 @@ import (
 )
 
 func day4main() {
-	testPasswords := ToPassports(common.ReadInput("input"))
-	validPassports := countValidPassports(testPasswords)
+	passports := ToPassports(common.ReadInput("input"))
 	println("Part One:")
-	fmt.Printf("Found %v valid passwords.\n", validPassports)
+	fmt.Printf("Found %v valid passwords.\n", countValidPassports(passports, PassportValidatorPartOne{}))
+	println()
+
+	println("Part Two:")
+	fmt.Printf("Found %v valid passwords.\n", countValidPassports(passports, PassportValidatorPartTwo{}))
 	println()
 }
 
-func countValidPassports(passports []Passport) int {
+func countValidPassports(passports []Passport, validator PassportValidator) int {
 	validPasswords := 0
 	for _, p := range passports {
-		if ValidatePassword(p) {
+		if validator.validate(p) {
 			validPasswords ++
 		}
 	}
