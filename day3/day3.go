@@ -1,7 +1,7 @@
 package day3
 
 import (
-	"../common"
+	"advent-of-code-2020/common"
 )
 
 type Slope struct {

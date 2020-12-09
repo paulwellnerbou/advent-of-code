@@ -1,7 +1,7 @@
 package day2
 
 import (
-	"../common"
+	"advent-of-code-2020/common"
 	"fmt"
 	"strconv"
 	"strings"

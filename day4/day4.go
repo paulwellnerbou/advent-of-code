@@ -1,7 +1,7 @@
 package day4
 
 import (
-	"../common"
+	"advent-of-code-2020/common"
 	"fmt"
 )
 

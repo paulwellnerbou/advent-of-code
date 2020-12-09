@@ -1,6 +1,6 @@
 package day1
 
-import "../common"
+import "advent-of-code-2020/common"
 
 func day1main() {
 	inputs := common.ToInts(common.ReadInput("input"))
