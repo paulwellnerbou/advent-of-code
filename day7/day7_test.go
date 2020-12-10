@@ -18,7 +18,16 @@ func TestCatalogReadCatalog(t *testing.T) {
 	}
 }
 
-func TestCatalog_howManyBagColorsCanContainAtLeastOneBag(t *testing.T) {
+func TestCatalog_howManyBagsAreRequiredInBagOfColor(t *testing.T) {
+	catalog := readCatalog("testinput")
+	count := catalog.howManyBagsAreRequiredInBagOfColor("shiny gold")
+
+	if count != 32 {
+		t.Errorf("Expected to find 126 bags, but found %d", count)
+	}
+}
+
+func TestCatalog_findAllBagsThatMayContainAtLeastOneBagOfColor(t *testing.T) {
 	catalog := readCatalog("input")
 	bags := catalog.findAllBagsThatMayContainAtLeastOneBagOfColor("shiny gold")
 

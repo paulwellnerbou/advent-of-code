@@ -50,6 +50,15 @@ func (c Catalog) bag(color string, bagRules []BagRule) Bag {
 	}
 }
 
+func (c Catalog) howManyBagsAreRequiredInBagOfColor(bagColor string) int {
+	count := 0
+	for _, bagRule := range c.getBag(bagColor).contains {
+		count += bagRule.quantity
+		count += c.howManyBagsAreRequiredInBagOfColor(bagRule.bag.color) * bagRule.quantity
+	}
+	return count
+}
+
 func (c Catalog) findAllBagsThatMayContainAtLeastOneBagOfColor(bagColor string) []Bag {
 	var bags []Bag
 	for _, bag := range c.bags {
