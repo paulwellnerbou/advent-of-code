@@ -1,22 +1,26 @@
 import * as fs from 'fs'
 
-export default function findHighestSumInInputFile (): number {
-  return findHighestSumInFile('input.txt')
+export function findHighestThreeSumInInputFile (fileName: string): number[] {
+  return findHighestSumInFile(fileName, 3)
 }
 
-export function findHighestSumInFile (fileName: string): number {
+export function findHighestSumInInputFile (fileName: string): number {
+  return findHighestSumInFile(fileName, 1)[0]
+}
+
+export function findHighestSumInFile (fileName: string, numberOfSumsToReturn: number = 1): number[] {
   const paragraphs = readInputFileSplitBy(fileName, '\n\n')
   const numberGroups = paragraphs.map(p => paragraphToListOfNumbers(p))
-  const summedGroups = sumAll(numberGroups)
+  const summedGroups = sumAll(numberGroups).sort((n1, n2) => n2 - n1)
 
-  return Math.max(...summedGroups)
+  return summedGroups.slice(0, numberOfSumsToReturn)
 }
 
 export function sumAll (numberGroups: number[][]): number[] {
   return numberGroups.map(group => sum(group))
 }
 
-function sum (numbers: number[]): number {
+export function sum (numbers: number[]): number {
   return numbers.reduce((accumulator, current) => {
     return accumulator + current
   }, 0)

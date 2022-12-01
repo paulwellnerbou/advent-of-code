@@ -1,8 +1,11 @@
-import { findHighestSumInFile, paragraphToListOfNumbers, readInputFileSplitBy, sumAll } from './module'
+import { findHighestSumInFile, findHighestThreeSumInInputFile, paragraphToListOfNumbers, readInputFileSplitBy, sumAll } from './module'
 
 describe('Test reading input files', () => {
   test('find highest sum in file', () => {
-    expect(findHighestSumInFile('input-test.txt')).toEqual(24000)
+    expect(findHighestThreeSumInInputFile('input-test.txt')).toEqual([24000, 11000, 10000])
+  })
+  test('find highest sum in file', () => {
+    expect(findHighestSumInFile('input-test.txt')).toEqual([24000])
   })
 
   test('sum all groups of numbers', () => {
