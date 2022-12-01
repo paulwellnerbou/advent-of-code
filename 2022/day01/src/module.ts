@@ -1,5 +1,14 @@
 import * as fs from 'fs'
 
+export function day1Part1 (): void {
+  console.log('Solution of first puzzle:', findHighestSumInInputFile('input.txt'), '\n')
+}
+
+export function day1Part2 (): void {
+  const firstThree = findHighestThreeSumInInputFile('input.txt')
+  console.log('Solution of second puzzle:', 'Sum of ', firstThree, ' = ', sum(firstThree))
+}
+
 export function findHighestThreeSumInInputFile (fileName: string): number[] {
   return findHighestSumInFile(fileName, 3)
 }
