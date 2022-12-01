@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "src/app.ts",
   "license": "MIT",
-  "type": "module",
   "scripts": {
     "test": "jest",
     "app": "ts-node src/app.ts"

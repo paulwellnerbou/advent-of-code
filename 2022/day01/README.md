@@ -1,4 +1,4 @@
-# Advent of Code, Day 1
+# Advent of Code 2022, Day 1
 
 ## Requirement
 
@@ -46,5 +46,5 @@ yarn test
 ### Real calculation
 
 ```shell
-yarn test
+yarn run app
 ```
