@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import * as fs from 'fs'
 
 export function printDay2Part1 (): void {
