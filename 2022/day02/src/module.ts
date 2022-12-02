@@ -18,9 +18,9 @@ export function day2part2 (fileName: string): number {
 }
 
 export function calculatePointsOfLinePart2 (line: string): number {
-  const splittedLine = line.split(' ')
-  const myChoice = calculateMyChoice(splittedLine[0], splittedLine[1])
-  return pointsForGame(splittedLine[0], myChoice) + pointsFor(myChoice)
+  const splitLine = line.split(' ')
+  const myChoice = calculateMyChoice(splitLine[0], splitLine[1])
+  return pointsForGame(splitLine[0], myChoice) + pointsFor(myChoice)
 }
 
 function gameFactor (num: number): number {
@@ -29,21 +29,17 @@ function gameFactor (num: number): number {
 
 export function calculateMyChoice (opponentsChoice: string, expectedOutcome: string): string {
   const op = codePoint(opponentsChoice) - 65
-  const outcome = codePoint(expectedOutcome) - 66
-
-  return String.fromCodePoint(65 + gameFactor(op + outcome))
+  const outcome = codePoint(expectedOutcome) - 65
+  return String.fromCodePoint(65 + gameFactor(op + outcome - 1))
 }
 
 export function calculatePointsOfLinePart1 (line: string): number {
-  const splittedLine = line.split(' ')
-  return pointsForGame(splittedLine[0], splittedLine[1]) + pointsFor(splittedLine[1])
+  const splitLine = line.split(' ')
+  return pointsForGame(splitLine[0], splitLine[1]) + pointsFor(splitLine[1])
 }
 
 export function pointsForGame (opponentsChoice: string, myChoice: string): number {
-  const op = codePoint(opponentsChoice) - 65
-  const my = codePoint(myChoice) - 65
-  const f = gameFactor(my - op + 1)
-  return f * 3
+  return gameFactor(codePoint(myChoice) - codePoint(opponentsChoice) + 1) * 3
 }
 
 export function codePoint (opponentsChoice: string): number {
