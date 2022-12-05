@@ -1,4 +1,4 @@
-function range(start: number, end: number): number[] { return Array.from({ length: (end + 1 - start) }, (v, k) => k + start) }
+import { range } from "../../common/utils"
 
 export class SectionRange {
     start: number

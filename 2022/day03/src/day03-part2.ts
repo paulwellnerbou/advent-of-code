@@ -1,6 +1,6 @@
 import { readInputFileSplitBy } from "../../common/file-utils"
 import { findCommonChars, priority } from "./day03-part1"
-import { sum } from "../../common/sum"
+import { group, sum } from "../../common/utils"
 
 export function printDay3Part2 (): void {
     console.log(
@@ -20,17 +20,4 @@ export function findBadgeInGroup (lines: string[]): string {
     if (commonChar.length !== 1) throw Error(`Expected only one badge item, but found ${commonChar.length}: ${commonChar}`)
 
     return commonChar
-}
-
-export function group (lines: string[]): string[][] {
-    const groups: string[][] = []
-    let group: string[] = []
-    lines.forEach((value, index) => {
-        group.push(value)
-        if (index % 3 === 2) {
-            groups.push(group)
-            group = []
-        }
-    })
-    return groups
 }

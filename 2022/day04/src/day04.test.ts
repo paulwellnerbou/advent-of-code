@@ -1,4 +1,4 @@
-import { Day04 } from "./day04-part1"
+import { Day04 } from "./day04"
 
 const TEST_INPUT_FILE = __dirname + "/../input-test.txt"
 const INPUT_FILE = __dirname + "/../input.txt"

@@ -1,5 +1,5 @@
 import { readInputFileSplitBy } from "../../common/file-utils"
-import { sum } from "../../common/sum"
+import { sum } from "../../common/utils"
 
 export function printDay1Part1 (fileName: string): void {
     console.log("Solution of first puzzle:", findHighestSumInInputFile(fileName), "\n")
