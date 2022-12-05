@@ -8,6 +8,8 @@ import {
     sumOfPrioritiesForFile
 } from "./part1"
 
+const TEST_INPUT_FILE = __dirname + "/../input-test.txt"
+
 describe("Run", () => {
     it("run first task", () => {
         printDay3Part1()
@@ -17,12 +19,12 @@ describe("Run", () => {
 describe("Tests", () => {
 
     it("test sum priorities for file", () => {
-        expect(sumOfPrioritiesForFile("input-test.txt")).toEqual(157)
+        expect(sumOfPrioritiesForFile(TEST_INPUT_FILE)).toEqual(157)
     })
 
     it("test get priorities for file", () => {
         expect(
-            prioritiesForFile("input-test.txt")).toEqual(
+            prioritiesForFile(TEST_INPUT_FILE)).toEqual(
             [16, 38, 42, 22, 20, 19]
         )
     })
