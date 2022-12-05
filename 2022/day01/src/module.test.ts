@@ -1,6 +1,6 @@
 import {
     printDay1Part1,
-    printday1Part2,
+    printDay1Part2,
     findHighestSumInFile,
     findHighestThreeSumInInputFile,
     paragraphToListOfNumbers,
@@ -12,7 +12,7 @@ describe("Run", () => {
         printDay1Part1(__dirname + "/../input.txt")
     })
     test("run second task", () => {
-        printday1Part2(__dirname + "/../input.txt")
+        printDay1Part2(__dirname + "/../input.txt")
     })
 })
 

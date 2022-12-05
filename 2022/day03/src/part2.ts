@@ -15,9 +15,9 @@ export function day3part2 (lines: string[]): number {
 }
 
 export function findBadgeInGroup (lines: string[]): string {
-    if (lines.length !== 3) throw Error("Expected only three in a group, but found " + lines.length)
+    if (lines.length !== 3) throw Error(`Expected only three in a group, but found ${lines.length}`)
     const commonChar = findCommonChars(findCommonChars(lines[0], lines[1]), lines[2])
-    if (commonChar.length !== 1) throw Error("Expected only one badge item, but found " + commonChar.length + ": " + commonChar)
+    if (commonChar.length !== 1) throw Error(`Expected only one badge item, but found ${commonChar.length}: ${commonChar}`)
 
     return commonChar
 }

@@ -1,4 +1,3 @@
-import * as fs from "fs"
 import { readInputFileSplitBy } from "../../common/file-utils"
 import { sum } from "../../common/sum"
 

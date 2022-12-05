@@ -18,7 +18,7 @@ export function findHighestSumInInputFile (fileName: string): number {
     return findHighestSumInFile(fileName, 1)[0]
 }
 
-export function findHighestSumInFile (fileName: string, numberOfSumsToReturn: number = 1): number[] {
+export function findHighestSumInFile (fileName: string, numberOfSumsToReturn = 1): number[] {
     const paragraphs = readInputFileSplitBy(fileName, "\n\n")
     const numberGroups = paragraphs.map(p => paragraphToListOfNumbers(p))
     const summedGroups = sumAll(numberGroups).sort((n1, n2) => n2 - n1)
