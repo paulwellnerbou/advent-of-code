@@ -6,7 +6,7 @@ import {
     priorityOfCommonChars,
     splitLineInHalf,
     sumOfPrioritiesForFile
-} from "./part1"
+} from "./day03-part1"
 
 const TEST_INPUT_FILE = __dirname + "/../input-test.txt"
 

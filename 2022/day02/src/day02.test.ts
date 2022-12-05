@@ -5,7 +5,7 @@ import {
     day2part2,
     pointsForGame,
     printDay2Part1, printDay2Part2
-} from "./module"
+} from "./day02"
 
 describe("Run: Day 2", () => {
     test("Part one:", () => {

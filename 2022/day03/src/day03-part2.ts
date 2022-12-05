@@ -1,5 +1,5 @@
 import { readInputFileSplitBy } from "../../common/file-utils"
-import { findCommonChars, priority } from "./part1"
+import { findCommonChars, priority } from "./day03-part1"
 import { sum } from "../../common/sum"
 
 export function printDay3Part2 (): void {

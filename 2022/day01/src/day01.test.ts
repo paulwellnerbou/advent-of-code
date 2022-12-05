@@ -5,7 +5,7 @@ import {
     findHighestThreeSumInInputFile,
     paragraphToListOfNumbers,
     sumAll
-} from "./module"
+} from "./day01"
 
 describe("Run", () => {
     test("run first task", () => {

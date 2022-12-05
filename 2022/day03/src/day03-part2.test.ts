@@ -1,4 +1,4 @@
-import { day3part2, findBadgeInGroup, group, printDay3Part2 } from "./part2"
+import { day3part2, findBadgeInGroup, group, printDay3Part2 } from "./day03-part2"
 import { readInputFileSplitBy } from "../../common/file-utils"
 
 const TEST_INPUT_FILE = __dirname + "/../input-test.txt"
