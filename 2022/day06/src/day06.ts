@@ -1,10 +1,5 @@
 import "./string"
 
-String.prototype.distinct = function (): string {
-    const strArray = this.split("")
-    return strArray.filter((value, index) => strArray.indexOf(value) == index).join("")
-}
-
 export class Day06 {
     findStartOfMessageMarker(input: string): number {
         return this.findSubstringWithDistinctChars(input, 14)
