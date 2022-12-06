@@ -17,9 +17,8 @@ describe("Day 5", () => {
 })
 
 describe("Tests", () => {
-    const day = new Day05(TEST_INPUT_FILE)
-
-    test("test part 1 with CrateMover 9001", () => {
+    test("test part 2 with CrateMover 9001", () => {
+        const day = new Day05(TEST_INPUT_FILE)
         day.readStacksFromFile()
         day.processMoveInstructions(new CrateMover9001())
 
@@ -29,6 +28,7 @@ describe("Tests", () => {
     })
 
     test("test part 1 with CrateMover 9000", () => {
+        const day = new Day05(TEST_INPUT_FILE)
         day.readStacksFromFile()
         day.processMoveInstructions(new CrateMover9000())
 

@@ -4,7 +4,7 @@ const TEST_INPUT_FILE = __dirname + "/../input-test.txt"
 const INPUT_FILE = __dirname + "/../input.txt"
 
 describe("Day X", () => {
-    const day04 = new Day0X()
+    const day = new Day0X()
     test("Part 1", () => {
         console.log("Part 1: ", 0)
     })

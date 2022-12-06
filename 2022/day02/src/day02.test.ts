@@ -17,6 +17,8 @@ describe("Run: Day 2", () => {
 })
 
 describe("Tests", () => {
+    const TEST_INPUT_FILE = __dirname + "/../input-test.txt"
+
     test("test points for win", () => {
         expect(pointsForGame("A", "B")).toEqual(6)
         expect(pointsForGame("B", "C")).toEqual(6)
@@ -59,11 +61,11 @@ describe("Tests", () => {
     })
 
     test("Make sure test input gives the correct amount of points in part 1", () => {
-        expect(day2part1(__dirname + "/../input-test.txt")).toEqual(15)
+        expect(day2part1(TEST_INPUT_FILE)).toEqual(15)
     })
 
     test("Make sure test input gives the correct amount of points in part 2", () => {
-        expect(day2part2(__dirname + "/../input-test.txt")).toEqual(12)
+        expect(day2part2(TEST_INPUT_FILE)).toEqual(12)
     })
 
     test("calculate code points", () => {

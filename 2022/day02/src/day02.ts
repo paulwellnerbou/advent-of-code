@@ -1,5 +1,5 @@
 import { readInputFileSplitBy } from "../../common/file-utils"
-import { sum } from "../../common/sum"
+import { sum } from "../../common/utils"
 
 export function printDay2Part1 (): void {
     console.log("Solution of first puzzle:", day2part1(__dirname + "/../input.txt"), "\n")

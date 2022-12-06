@@ -8,21 +8,25 @@ import {
 } from "./day01"
 
 describe("Run", () => {
+    const INPUT_FILE = __dirname + "/../input.txt"
+
     test("run first task", () => {
-        printDay1Part1(__dirname + "/../input.txt")
+        printDay1Part1(INPUT_FILE)
     })
     test("run second task", () => {
-        printDay1Part2(__dirname + "/../input.txt")
+        printDay1Part2(INPUT_FILE)
     })
 })
 
 describe("Test reading input files", () => {
+    const TEST_INPUT_FILE = __dirname + "/../input-test.txt"
+
     test("find highest sum in file", () => {
-        expect(findHighestThreeSumInInputFile(__dirname + "/../input-test.txt")).toEqual([24000, 11000, 10000])
+        expect(findHighestThreeSumInInputFile(TEST_INPUT_FILE)).toEqual([24000, 11000, 10000])
     })
 
     test("find highest sum in file", () => {
-        expect(findHighestSumInFile(__dirname + "/../input-test.txt")).toEqual([24000])
+        expect(findHighestSumInFile(TEST_INPUT_FILE)).toEqual([24000])
     })
 
     test("sum all groups of numbers", () => {
