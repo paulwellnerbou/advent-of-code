@@ -31,7 +31,7 @@ export class Forest {
         return this.process(coord, reduceFn, 0).reduce((previousValue, currentValue) => previousValue * currentValue)
     }
 
-    isVisible (coord: Coord): number {
+    isVisible (coord: Coord): boolean {
         const reduceFn = (previousValue: number, currentValue: number, currentIndex: number, array: number[]) => {
             if (currentValue >= this.getTreeHeight(coord)) {
                 array.splice(1)
@@ -39,7 +39,7 @@ export class Forest {
             }
             return 1
         }
-        return this.process(coord, reduceFn, 1).reduce((previousValue, currentValue) => previousValue + currentValue)
+        return this.process(coord, reduceFn, 1).reduce((previousValue, currentValue) => previousValue + currentValue) !== 0
     }
 
     process (coord: Coord, reduceFn: (previousValue: number, currentValue: number, currentIndex: number, array: number[]) => number, initialValue = 0) : number[] {
@@ -53,7 +53,7 @@ export class Forest {
 
     countVisibleTrees (): number {
         return sum(this.trees.map((treeline, y) => {
-            return treeline.filter((height, x) => this.isVisible({x: x, y: y})).length
+            return treeline.filter((treeHeight, x) => this.isVisible({x: x, y: y})).length
         }))
     }
 
