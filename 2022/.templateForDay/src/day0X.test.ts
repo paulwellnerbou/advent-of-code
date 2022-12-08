@@ -3,7 +3,7 @@ import { Day0X } from "./day0X"
 const TEST_INPUT_FILE = __dirname + "/../input-test.txt"
 const INPUT_FILE = __dirname + "/../input.txt"
 
-describe("Day X", () => {
+describe("Day 0X", () => {
     const day = new Day0X()
     test("Part 1", () => {
         console.log("Part 1: ", 0)
