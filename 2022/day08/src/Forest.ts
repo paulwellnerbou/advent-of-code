@@ -1,5 +1,10 @@
 import { sum } from "../../common/utils"
 
+interface Coord {
+    x: number
+    y: number
+}
+
 export class Forest {
     trees: number[][] = []
 
@@ -11,64 +16,50 @@ export class Forest {
         this.trees = input.map(line => line.split("").map(c => +c))
     }
 
-    isVisible (x: number, y: number): boolean {
-        return this.isVisibleInDirection(x, y, 1, 0) ||
-            this.isVisibleInDirection(x, y, 0, 1) ||
-            this.isVisibleInDirection(x, y, -1, 0) ||
-            this.isVisibleInDirection(x, y, 0, -1)
+    getTreeHeight (coord: Coord): number {
+        return this.trees[coord.y][coord.x]
     }
 
-    calculateScenicScore (x: number, y: number): number {
-        return this.countScenicTreesInDirection(x, y, 1, 0) *
-        this.countScenicTreesInDirection(x, y, 0, 1) *
-        this.countScenicTreesInDirection(x, y, -1, 0) *
-        this.countScenicTreesInDirection(x, y, 0, -1)
-    }
-
-    countScenicTreesInDirection (x: number, y: number, xIncrement: number, yIncrement: number): number {
-        const currentHeight = this.get(x, y)
-        let scenicTrees = 0
-        while (x > 0 && y > 0 && x < this.trees.length - 1 && y < this.trees[x].length - 1) {
-            const nextTree = this.get(x + xIncrement, y + yIncrement)
-            scenicTrees++
-            if (nextTree >= currentHeight) {
-                return scenicTrees
+    calculateScenicScore (coord: Coord): number {
+        const reduceFn = (previousValue: number, currentValue: number, currentIndex: number, array: number[]) => {
+            if (currentValue >= this.getTreeHeight(coord)) {
+                array.splice(1)
             }
-            x += xIncrement
-            y += yIncrement
+            return previousValue + 1
         }
-        return scenicTrees
+
+        return this.process(coord, reduceFn, 0).reduce((previousValue, currentValue) => previousValue * currentValue)
     }
 
-    isVisibleInDirection (x: number, y: number, xIncrement: number, yIncrement: number): boolean {
-        const currentHeight = this.get(x, y)
-        while (x > 0 && y > 0 && x < this.trees.length - 1 && y < this.trees[x].length - 1) {
-            const nextTree = this.get(x + xIncrement, y + yIncrement)
-            if (nextTree >= currentHeight) {
-                return false
+    isVisible (coord: Coord): number {
+        const reduceFn = (previousValue: number, currentValue: number, currentIndex: number, array: number[]) => {
+            if (currentValue >= this.getTreeHeight(coord)) {
+                array.splice(1)
+                return 0
             }
-            x += xIncrement
-            y += yIncrement
+            return 1
         }
-        return true
+        return this.process(coord, reduceFn, 1).reduce((previousValue, currentValue) => previousValue + currentValue)
     }
 
-    get (x: number, y: number): number {
-        if (this.trees.length <= y || this.trees[0].length <= x) {
-            console.error(`Invalid coordinates ${x}, ${y} for Forest[${this.trees.length}, ${this.trees[0].length}]`)
-        }
-        return this.trees[y][x]
-    }
-
-    detectTreeWithBestScenicView (): number {
-        return Math.max(...this.trees.map((treeline, y) => {
-            return Math.max(...treeline.map((height, x) => this.calculateScenicScore(x, y)))
-        }))
+    process (coord: Coord, reduceFn: (previousValue: number, currentValue: number, currentIndex: number, array: number[]) => number, initialValue = 0) : number[] {
+        return [
+            { index: coord.x, line: this.trees[coord.y]},
+            { index: coord.y, line: this.trees.map(line => line[coord.x])}
+        ].map(v => [v.line.slice(0, v.index).reverse(), v.line.slice(v.index + 1, this.trees.length)]).flat().map(line => line
+            .reduce(reduceFn, initialValue)
+        )
     }
 
     countVisibleTrees (): number {
         return sum(this.trees.map((treeline, y) => {
-            return treeline.filter((height, x) => this.isVisible(x, y)).length
+            return treeline.filter((height, x) => this.isVisible({x: x, y: y})).length
+        }))
+    }
+
+    detectTreeWithBestScenicView (): number {
+        return Math.max(...this.trees.map((treeline, y) => {
+            return Math.max(...treeline.map((height, x) => this.calculateScenicScore({x: x, y: y})))
         }))
     }
 }
