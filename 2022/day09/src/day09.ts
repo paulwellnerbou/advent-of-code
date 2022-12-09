@@ -2,13 +2,15 @@ import { readInputFileSplitBy } from "../../common/file-utils"
 import { range } from "../../common/utils"
 
 export function day09part1 (fileName: string): number {
-    const d = new Day09(2)
-    d.process(fileName)
-    return d.distinctVisits().length
+    return day09(fileName, 2)
 }
 
 export function day09part2 (fileName: string): number {
-    const d = new Day09(10)
+    return day09(fileName, 10)
+}
+
+function day09 (fileName: string, amountOfKnots: number): number {
+    const d = new Day09(amountOfKnots)
     d.process(fileName)
     return d.distinctVisits().length
 }
