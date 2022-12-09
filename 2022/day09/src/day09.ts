@@ -25,8 +25,12 @@ export class Day09 {
 
     constructor (amountOfKnots: number) {
         range(1, amountOfKnots).forEach(() =>
-            this.knots.push({x: 0, y: 0})
+            this.knots.push(this.newCoord())
         )
+    }
+
+    private newCoord (x = 0, y = 0) : Coord {
+        return { x: x, y: y }
     }
 
     moveHead(str: string): void {
@@ -55,7 +59,7 @@ export class Day09 {
     }
 
     private follow (head: Coord, tail: Coord): Coord {
-        const moveTail = {x: 0, y: 0} as Coord
+        const moveTail = this.newCoord()
         if((Math.abs(head.x - tail.x) > 1) || (Math.abs(head.y - tail.y) > 1)) {
             moveTail.x += Math.sign(head.x - tail.x)
             moveTail.y += Math.sign(head.y - tail.y)
