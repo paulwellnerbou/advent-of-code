@@ -27,7 +27,7 @@ describe("Tests", () => {
     test("Test 10000 rounds and check most inspected items without reducing worry level", () => {
         const day = new Day11()
         day.parseMonkeyFromFile(TEST_INPUT_FILE)
-        day.rounds(10000, (n: number) => n)
+        day.rounds(10000, (n: number) => n % day.productOfAllMonkeyDivisables)
 
         expect(day.monkeyInspectsItems).toContain(52166)
         expect(day.monkeyInspectsItems).toContain(52013)
