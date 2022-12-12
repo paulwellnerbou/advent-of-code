@@ -1,7 +1,7 @@
 import { Day05 } from "./day05"
 import { CrateMover9000, CrateMover9001 } from "./CrateMover"
 
-export const TEST_INPUT_FILE = __dirname + "/../input-test.txt"
+const TEST_INPUT_FILE = __dirname + "/../input-test.txt"
 const INPUT_FILE = __dirname + "/../input.txt"
 
 describe("Day 5", () => {
