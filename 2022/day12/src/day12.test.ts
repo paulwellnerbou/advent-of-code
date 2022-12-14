@@ -4,13 +4,15 @@ const TEST_INPUT_FILE = __dirname + "/../input-test.txt"
 const INPUT_FILE = __dirname + "/../input.txt"
 
 describe("Day 12", () => {
-    const day = new Day12()
-    day.readHeightMapFromFile(INPUT_FILE)
 
     test("Part 1", () => {
-        console.log("Part 1: ", day.findPathTurnByTurn())
+        const day = new Day12()
+        day.readHeightMapFromFile(INPUT_FILE)
+        expect(day.findPathTurnByTurn()).toBe(412)
     })
     test("Part 2", () => {
+        const day = new Day12()
+        day.readHeightMapFromFile(INPUT_FILE)
         console.log("Part 2: ", day.findStartingPointWithShortestPath())
     })
 })
@@ -19,10 +21,12 @@ describe("Tests", () => {
     const day = new Day12()
     day.readHeightMapFromFile(TEST_INPUT_FILE)
 
-    // test("find shortest path from best starting point", () => {
-    //     const turns = day.findStartingPointWithShortestPath()
-    //     expect(turns).toBe(29)
-    // })
+    test("test find best a to start with", () => {
+        const dayPart2 = new Day12()
+        dayPart2.readHeightMapFromFile(TEST_INPUT_FILE)
+        const turns = dayPart2.findStartingPointWithShortestPath()
+        expect(turns).toBe(29)
+    })
 
     test("test find path by turns", () => {
         const turns = day.findPathTurnByTurn()
@@ -36,13 +40,25 @@ describe("Tests", () => {
     })
 
     test("test e found: not found", () => {
-        const found = day.eFound([{ x: 4, y: 2}])
+        const found = day.findHeightIn([{ x: 4, y: 2}])
         expect(found).toBeFalsy()
     })
 
     test("test e found: found", () => {
-        const found = day.eFound([{ x: 5, y: 2}])
+        const found = day.findHeightIn([{ x: 5, y: 2}])
         expect(found).toBeTruthy()
+    })
+
+    test("find best next positions with already visited positions", () => {
+        const nextPositions = day.nextBestPositions({ x: 1, y: 0}, [{x: 0, y: 0}])
+        expect(nextPositions).toHaveLength(2)
+        expect(nextPositions).toEqual(expect.arrayContaining([{x: 2, y: 0}, {x: 1, y: 1}]));
+    })
+
+    test("find best next positions", () => {
+        const nextPositions = day.nextBestPositions({ x: 4, y: 2})
+        expect(nextPositions).toHaveLength(4)
+        expect(nextPositions[0]).toStrictEqual({x: 5, y: 2})
     })
 
     test("test get height of", () => {

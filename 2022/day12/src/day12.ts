@@ -35,20 +35,25 @@ export class Day12 {
 
     directions = [[-1, 0], [1, 0], [0, -1], [0, 1]]
 
-    reachableCondition = (currentHeight: number, nextHeight: number) => currentHeight <= nextHeight + 1
+    isReachableUp = (current: number, next: number) => {
+        return next <= current + 1
+    }
 
     findStartingPointWithShortestPath (): number {
-        this.reachableCondition = (currentHeight: number, nextHeight: number) => nextHeight <= currentHeight + 1
+        this.isReachableUp = (current: number, next: number) => {
+            return current <= next + 1
+        }
         return this.findPathTurnByTurn(this.detectStartPosition("E"), "a")
     }
 
-    findPathTurnByTurn (start: Coord = this.detectStartPosition(), searchForHeight = "E"): number {
+    findPathTurnByTurn (start: Coord = this.detectStartPosition("S"), searchForHeight = "E"): number {
         let currentPositions = [start]
         const visitedPositions = [start]
         let stepCounter = 0
 
-        while (!this.eFound(currentPositions, searchForHeight)) {
+        while (!this.findHeightIn(currentPositions, searchForHeight)) {
             currentPositions = distinct(this.allNextPositions(currentPositions)).filter((coord) => !contains(visitedPositions, coord))
+            if (currentPositions.length == 0) throw Error("No positions found.")
             stepCounter++
             visitedPositions.push(...currentPositions)
         }
@@ -59,7 +64,7 @@ export class Day12 {
         return coords.map(c => this.nextPositions(c)).flat()
     }
 
-    eFound (currentPositions: Coord[], searchFor = "E") {
+    findHeightIn (currentPositions: Coord[], searchFor = "E") {
         return currentPositions.findIndex(coord => this.getHeightOfCoord(coord) == searchFor) >= 0
     }
 
@@ -69,6 +74,14 @@ export class Day12 {
 
     getHeightOf (x: number, y: number): string {
         return this.heightMap[y][x]
+    }
+
+    nextBestPositions (start: Coord, visitedCoords: Coord[] = []): Coord[] {
+        const nextPositions = this.nextPositions(start)
+
+        return nextPositions
+            .filter(coord => visitedCoords.findIndex(c => c.x == coord.x && c.y == coord.y) < 0)
+            .sort((a, b) => (this.getHeightOfCoord(a).codePointAt(0)! - this.getHeightOfCoord(b).codePointAt(0)!))
     }
 
     nextPositions (start: Coord): Coord[] {
@@ -86,11 +99,14 @@ export class Day12 {
     }
 
     isReachable (start: Coord, direction: number[]) {
-        let heightOfNextStep = this.getHeightOf(start.x + direction[0], start.y + direction[1])
-        if (heightOfNextStep == "E") heightOfNextStep = "z"
-        let currentHeight = this.getHeightOfCoord(start)
-        if (currentHeight == "S") currentHeight = "a"
-        return this.reachableCondition(heightOfNextStep.codePointAt(0)!, currentHeight.codePointAt(0)! + 1)
+        const heightOfNextStep = this.getHeightValue(this.getHeightOf(start.x + direction[0], start.y + direction[1]))
+        const currentHeight = this.getHeightValue(this.getHeightOfCoord(start))
+        const reachable = this.isReachableUp(currentHeight.codePointAt(0)!, heightOfNextStep.codePointAt(0)!)
+        return reachable
+    }
+
+    getHeightValue (h: string) {
+        return h == "E" ? "z" : h == "S" ? "a" : h
     }
 
     isInRange (start: Coord, direction: number[]): boolean {
@@ -106,10 +122,10 @@ export class Day12 {
         this.heightMap = lines.map(line => line.split(""))
     }
 
-    detectStartPosition (searchFor = "S"): Coord {
-        const y = this.heightMap.findIndex(line => line.indexOf(searchFor) >= 0)
+    detectStartPosition (searchForHeight = "S"): Coord {
+        const y = this.heightMap.findIndex(line => line.indexOf(searchForHeight) >= 0)
         return {
-            x: this.heightMap[y].findIndex(c => c == searchFor),
+            x: this.heightMap[y].findIndex(c => c == searchForHeight),
             y: y
         }
     }
