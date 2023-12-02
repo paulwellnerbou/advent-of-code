@@ -15,5 +15,5 @@ export const day0Xpart1 = async (): Promise<number> => {
 }
 
 export const day0Xpart2 = async (): Promise<number> => {
-    return sumAllLineResults(import.meta.dir + "/input-input.txt", (line) => processLine(line))
+    return sumAllLineResults(import.meta.dir + "/input.txt", (line) => processLine(line))
 }

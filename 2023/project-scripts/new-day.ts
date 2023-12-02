@@ -12,7 +12,6 @@ async function copyTemplateDirectory(day: number): Promise<void> {
     await mkdir(newDayDirectory);
 
     (await readdir( templateDirectory )).forEach(async (f: string) => {
-        console.debug("Copying file: ", path.join(templateDirectory, f));
         const file = Bun.file(path.join(templateDirectory, f));
         await Bun.write(path.join(newDayDirectory, f), file);
     })
