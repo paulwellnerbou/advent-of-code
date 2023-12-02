@@ -2,11 +2,30 @@ import { sumAllLineResults } from "../common/file-utils"
 
 interface Game {
     id: number,
-    turns: Bag[],
+    turns: SetOfCubes[],
 }
 
-interface Bag {
+interface SetOfCubes {
     [color: string]: number
+}
+
+export function powerOfSetOfCubes(setOfCubes: SetOfCubes): number {
+    return Object.values(setOfCubes).reduce((acc, val) => acc * val)
+}
+
+export function minimalSetOfCubes<T>(turns: SetOfCubes[], callback: (setOfCubes: SetOfCubes) => T) {
+    const minimalSetOfCubes = {
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+    } as SetOfCubes
+
+    turns.forEach(turn => {
+        Object.keys(minimalSetOfCubes).forEach(key => {
+            minimalSetOfCubes[key] = Math.max(minimalSetOfCubes[key], turn[key] || 0)
+        })
+    })
+    return callback(minimalSetOfCubes)
 }
 
 export function parseLineToGame(line: string): Game {
@@ -14,7 +33,7 @@ export function parseLineToGame(line: string): Game {
     const gameId = parseInt(gameIdString.replace("Game ", ""))
 
     const gameTurns = gameTurnsString.split("; ").map(gameTurn => {
-        const gameBag = {} as Bag
+        const gameBag = {} as SetOfCubes
         const turns = gameTurn.split(", ")
         for (const turn of turns) {
             const [count, color] = turn.split(" ")
@@ -29,7 +48,7 @@ export function parseLineToGame(line: string): Game {
     }
 }
 
-export function checkIfGameIsPossible(gameBag: Bag, gameTurns: Bag[]): boolean {
+export function checkIfGameIsPossible(gameBag: SetOfCubes, gameTurns: SetOfCubes[]): boolean {
     for (const gameTurn of gameTurns) {
         for (const color in gameTurn) {
             if (gameBag[color] === undefined || gameBag[color] < gameTurn[color]) {
@@ -40,12 +59,23 @@ export function checkIfGameIsPossible(gameBag: Bag, gameTurns: Bag[]): boolean {
     return true;
 }
 
-export const processLine = (line: string, bag: Bag): number => {
+/**
+ * process line for part 1
+ */
+export const idIfGameIsPossible = (line: string, bag: SetOfCubes): number => {
     const game = parseLineToGame(line)
     return checkIfGameIsPossible(
         bag,
         game.turns
     ) ? game.id : 0
+}
+
+/**
+ * process line for part 2
+ */
+export const powerOfMinimalPossibleSetOfCubes = (line: string): number => {
+    const game = parseLineToGame(line)
+    return minimalSetOfCubes(game.turns, s => powerOfSetOfCubes(s))
 }
 
 export const printDay02 = async (): Promise<void> => {
@@ -60,10 +90,10 @@ export const day02part1 = async (): Promise<number> => {
         "red": 12,
         "green": 13,
         "blue": 14,
-    } as Bag
-    return sumAllLineResults(import.meta.dir + "/input.txt", (line) => processLine(line, bag))
+    } as SetOfCubes
+    return sumAllLineResults(import.meta.dir + "/input.txt", (line) => idIfGameIsPossible(line, bag))
 }
 
 export const day02part2 = async (): Promise<number> => {
-    return sumAllLineResults(import.meta.dir + "/input.txt", (line) => processLine(line, {}))
+    return sumAllLineResults(import.meta.dir + "/input.txt", (line) => idIfGameIsPossible(line, {}))
 }
