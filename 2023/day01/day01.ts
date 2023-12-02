@@ -24,9 +24,9 @@ export const printDay01 = async (): Promise<void> => {
 }
 
 export const day01part1 = async (): Promise<number> => {
-    return sumAllLineResults("./day01/2023-1-input.txt", (line) => calculateNumberOfLine(line))
+    return sumAllLineResults(import.meta.dir + "/input.txt", (line) => calculateNumberOfLine(line))
 }
 
 export const day01part2 = async (): Promise<number> => {
-    return sumAllLineResults("./day01/2023-1-input.txt", (line) => calculateNumberOfLine(preprocessLine(line)))
+    return sumAllLineResults(import.meta.dir + "/input.txt", (line) => calculateNumberOfLine(preprocessLine(line)))
 }

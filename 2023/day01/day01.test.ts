@@ -9,10 +9,10 @@ test("calculate number for line", () => {
   expect(calculateNumberOfLine("treb7uchet")).toBe(77);
 });
 
-test("calculate sum of lines reading from file", () => {
+test("Part 1: Calculate sum of lines reading from file", () => {
   expect(sumAllLineResults("./day01/test-input1.txt", (line) => calculateNumberOfLine(line))).resolves.toBe(142)
 })
 
-test("calculate sum of lines reading from file", () => {
+test("Part 2: calculate sum of lines reading from file, preprocessing text numbers before", () => {
   expect(sumAllLineResults("./day01/test-input2.txt", (line) => calculateNumberOfLine(preprocessLine(line)))).resolves.toBe(281)
 })
