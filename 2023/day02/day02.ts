@@ -95,5 +95,5 @@ export const day02part1 = async (): Promise<number> => {
 }
 
 export const day02part2 = async (): Promise<number> => {
-    return sumAllLineResults(import.meta.dir + "/input.txt", (line) => idIfGameIsPossible(line, {}))
+    return sumAllLineResults(import.meta.dir + "/input.txt", (line) => powerOfMinimalPossibleSetOfCubes(line))
 }
